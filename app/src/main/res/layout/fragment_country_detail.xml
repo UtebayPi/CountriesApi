@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CountryDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name: Mexico" />
+
+        <TextView
+            android:id="@+id/tv_capital"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="Capital: Mexico City" />
+
+        <TextView
+            android:id="@+id/tv_region"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_capital"
+            tools:text="Region: North America" />
+
+        <ImageView
+            android:id="@+id/iv_flag"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/iv_emblem"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_flag"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_currency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_languages"
+            tools:text="Currency: Pesos" />
+
+        <TextView
+            android:id="@+id/tv_population"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_emblem"
+            tools:text="Population: 82 million" />
+
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_population"
+            tools:text="Area: 1000 km2" />
+
+        <TextView
+            android:id="@+id/tv_languages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_flag"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_area"
+            tools:text="Languages:  English, Spanish" />
+
+
+        <Button
+            android:id="@+id/btn_open_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Open in map"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_emblem"
+            app:layout_constraintEnd_toStartOf="@+id/iv_emblem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_currency" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

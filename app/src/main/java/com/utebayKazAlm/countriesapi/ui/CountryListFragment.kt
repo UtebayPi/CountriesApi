@@ -23,7 +23,7 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
 
     private var _binding: FragmentCountryListBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: CountryViewModel by activityViewModels()
+    private val viewModel: CountriesViewModel by activityViewModels()
     private lateinit var countryListAdapter: CountryListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,6 +36,9 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
 
         setupRecyclerView()
 
+        //Создал Job чтобы его можно было отменять,
+        //чтобы suspend функция не запускалась каждый раз при изменений каждой буквы в поле ввода,
+        //а ожидало пока пользователь полностью напишет слово.
         var searchJob: Job? = null
         binding.etCountryName.addTextChangedListener { editable ->
             searchJob?.cancel()
@@ -43,6 +46,7 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
                 delay(500)
                 if (editable == null) return@launch
                 if (editable.toString().isEmpty()) {
+                    //Если поле пустое. то снова берем все страны.
                     viewModel.getAllCountries()
                     return@launch
                 }
@@ -51,7 +55,9 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
         }
 
         viewModel.countries.observe(viewLifecycleOwner) { result ->
+            //Удобнее чем писать when.
             result.onSuccess { countries ->
+                //pbLoading это ProgressBar. Мы его скрываем, показываем.
                 binding.pbLoading.visibility = View.INVISIBLE
                 countryListAdapter.submitList(countries)
             }
@@ -67,14 +73,17 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
 
     private fun setupRecyclerView() {
         countryListAdapter = CountryListAdapter { country ->
-            viewModel.selectCountry(country)
-            findNavController().navigate(CountryListFragmentDirections.actionCountryListFragmentToCountryDetailFragment())
+            //Устанавливаем страну, данные о которой будут показаны на втором фрагменте.
+            viewModel.setCountry(country)
+            findNavController().navigate(
+                CountryListFragmentDirections.actionCountryListFragmentToCountryDetailFragment()
+            )
         }
         binding.rvCountries.adapter = countryListAdapter
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 }

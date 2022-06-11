@@ -21,7 +21,7 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
 
     private var _binding: FragmentCountryDetailBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: CountryViewModel by activityViewModels()
+    private val viewModel: CountriesViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentCountryDetailBinding.inflate(inflater)
@@ -41,6 +41,7 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
             country.coatOfArms?.png.let { url ->
                 Glide.with(this).load(url).into(binding.ivEmblem)
             }
+            //Не использовал data binding так как оно делает нахождение ошибок в коде сложнее
             binding.apply {
                 tvName.text = "Country: " + country.name?.common.toString()
                 tvCapital.text = "Capital: " + (country.capital?.get(0) ?: "none")
@@ -50,19 +51,20 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
                 tvArea.text = "Area: " + (country.area?.toInt() ?: "none") + " km2"
                 tvCurrency.text = "Currency: " + (country.currencies?.values?.elementAtOrNull(0)?.name ?: "none")
                 tvLanguages.text = "Language: " + (country.languages?.values?.elementAtOrNull(0) ?: "none")
-                btnOpenMap.setOnClickListener {
-                    val intentUri = Uri.parse(country.maps?.googleMaps)
-                    val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
-                    mapIntent.setPackage("com.google.android.apps.maps")
-                    startActivity(mapIntent)
-                }
+            }
+            //При нажатий на кнопку, перенаправляем на расположение этой страны в google maps.
+            binding.btnOpenMap.setOnClickListener {
+                val intentUri = Uri.parse(country.maps?.googleMaps)
+                val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             }
 
         }
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 }

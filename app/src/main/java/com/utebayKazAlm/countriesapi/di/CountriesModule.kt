@@ -4,6 +4,7 @@ import com.utebayKazAlm.countriesapi.data.CountriesApi
 import com.utebayKazAlm.countriesapi.util.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.utebayKazAlm.countriesapi.data.CountriesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,10 +33,14 @@ object CountriesModule {
             .add(KotlinJsonAdapterFactory())
             .build()
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL) //BASE_URL находится в util/Constants.kt
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()
             .create(CountriesApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideCountriesRepository(api: CountriesApi): CountriesRepository = CountriesRepository(api)
 }

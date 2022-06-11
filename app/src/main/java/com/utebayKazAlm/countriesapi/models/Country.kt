@@ -1,5 +1,6 @@
 package com.utebayKazAlm.countriesapi.models
 
+//Наша главная модель.
 data class Country(
     val altSpellings: List<String>?,
     val area: Double?,

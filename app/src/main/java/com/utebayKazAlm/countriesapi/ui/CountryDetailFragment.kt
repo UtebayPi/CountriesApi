@@ -31,7 +31,7 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.country.observe(viewLifecycleOwner) { country: Country? ->
-            if (country == null) {
+            if (country == null) { // проверяем на null, если null то возвращаемся.
                 findNavController().popBackStack()
                 return@observe
             }
@@ -41,6 +41,7 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
             country.coatOfArms?.png.let { url ->
                 Glide.with(this).load(url).into(binding.ivEmblem)
             }
+            //Здесь все данные крепим к TextView и ImageView.
             //Не использовал data binding так как оно делает нахождение ошибок в коде сложнее
             binding.apply {
                 tvName.text = "Country: " + country.name?.common.toString()

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/countryListFragment"
         android:name="com.utebayKazAlm.countriesapi.ui.CountryListFragment"
-        android:label="fragment_country_list"
+        android:label="CountriesApi"
         tools:layout="@layout/fragment_country_list" >
         <action
             android:id="@+id/action_countryListFragment_to_countryDetailFragment"
@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/countryDetailFragment"
         android:name="com.utebayKazAlm.countriesapi.ui.CountryDetailFragment"
-        android:label="fragment_country_detail"
+        android:label="Details"
         tools:layout="@layout/fragment_country_detail" />
 </navigation>

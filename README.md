@@ -1,2 +1,2 @@
 # CountriesApi
-Приложение с использованием restcountries.com api, которое дает данные о разных странах.
+Catalogue App created using restcountries.com api, that gives information about different countries.

@@ -22,8 +22,7 @@ object CountriesModule {
     @Provides
     @Singleton
     fun provideCountriesApi(): CountriesApi {
-        // позволяет логировать запросы в retrofit,
-        //полезно для дебаггинга
+        // lets log calls made to retrogit, very helpful for debugging.
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder()
@@ -33,7 +32,7 @@ object CountriesModule {
             .add(KotlinJsonAdapterFactory())
             .build()
         return Retrofit.Builder()
-            .baseUrl(BASE_URL) //BASE_URL находится в util/Constants.kt
+            .baseUrl(BASE_URL) //BASE_URL is in util/Constants.kt
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()

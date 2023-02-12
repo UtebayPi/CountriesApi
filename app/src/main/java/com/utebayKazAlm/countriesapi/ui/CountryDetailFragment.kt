@@ -41,8 +41,8 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
             country.coatOfArms?.png.let { url ->
                 Glide.with(this).load(url).into(binding.ivEmblem)
             }
-            //Здесь все данные крепим к TextView и ImageView.
-            //Не использовал data binding так как оно делает нахождение ошибок в коде сложнее
+            //Here we attach all the values to TextViews. Didn't use data binding,
+            // because it makes debugging harder.
             binding.apply {
                 tvName.text = "Country: " + country.name?.common.toString()
                 tvCapital.text = "Capital: " + (country.capital?.get(0) ?: "none")
@@ -53,7 +53,7 @@ class CountryDetailFragment : Fragment(R.layout.fragment_country_detail) {
                 tvCurrency.text = "Currency: " + (country.currencies?.values?.elementAtOrNull(0)?.name ?: "none")
                 tvLanguages.text = "Language: " + (country.languages?.values?.elementAtOrNull(0) ?: "none")
             }
-            //При нажатий на кнопку, перенаправляем на расположение этой страны в google maps.
+            //When we press the button, it directs us to that country's location in google maps/
             binding.btnOpenMap.setOnClickListener {
                 val intentUri = Uri.parse(country.maps?.googleMaps)
                 val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)

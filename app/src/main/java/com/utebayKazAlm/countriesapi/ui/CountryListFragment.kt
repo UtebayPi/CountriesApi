@@ -36,9 +36,9 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
 
         setupRecyclerView()
 
-        //Создал Job чтобы его можно было отменять,
-        //чтобы suspend функция не запускалась каждый раз при изменений каждой буквы в поле ввода,
-        //а ожидало пока пользователь полностью напишет слово.
+        //Created a Job instance so that i can cancel it, made it wait some time
+        // before calling the api. So that api wasn't called every time you enter a syllable,
+        // but waited until you write the whole world.
         var searchJob: Job? = null
         binding.etCountryName.addTextChangedListener { editable ->
             searchJob?.cancel()
@@ -46,7 +46,7 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
                 delay(500)
                 if (editable == null) return@launch
                 if (editable.toString().isEmpty()) {
-                    //Если поле пустое. то снова берем все страны.
+                    //If the field is empty, we again get all the countries.
                     viewModel.getAllCountries()
                     return@launch
                 }
@@ -55,9 +55,8 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
         }
 
         viewModel.countries.observe(viewLifecycleOwner) { result ->
-            //Удобнее чем писать when.
             result.onSuccess { countries ->
-                //pbLoading это ProgressBar. Мы его скрываем, показываем.
+                //pbLoading is the ProgressBar. We show it and hide it.
                 binding.pbLoading.visibility = View.INVISIBLE
                 countryListAdapter.submitList(countries)
             }
@@ -73,7 +72,7 @@ class CountryListFragment : Fragment(R.layout.fragment_country_list) {
 
     private fun setupRecyclerView() {
         countryListAdapter = CountryListAdapter { country ->
-            //Устанавливаем страну, данные о которой будут показаны на втором фрагменте.
+            //Setting up a country that we want to show in the details fragment.
             viewModel.setCountry(country)
             findNavController().navigate(
                 CountryListFragmentDirections.actionCountryListFragmentToCountryDetailFragment()

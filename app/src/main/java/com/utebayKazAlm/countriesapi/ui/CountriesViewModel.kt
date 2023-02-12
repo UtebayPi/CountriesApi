@@ -1,14 +1,11 @@
 package com.utebayKazAlm.countriesapi.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.utebayKazAlm.countriesapi.data.CountriesApi
 import com.utebayKazAlm.countriesapi.data.CountriesRepository
 import com.utebayKazAlm.countriesapi.models.Country
-import com.utebayKazAlm.countriesapi.util.ResultOf
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +15,7 @@ class CountriesViewModel @Inject constructor(private val repository: CountriesRe
 
     val countries = repository.countries
 
-    //Решил использовать LiveData вместо Flow в этом проекте.
+    //Decided to use LiveData instead of Flow.
     private val _country: MutableLiveData<Country> = MutableLiveData()
     val country: LiveData<Country> = _country
 

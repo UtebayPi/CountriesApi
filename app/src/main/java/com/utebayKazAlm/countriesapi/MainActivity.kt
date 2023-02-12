@@ -18,11 +18,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.NavHostFragment) as NavHostFragment
         navController = navHostFragment.navController
-        //Нужен чтобы при переходах, отображалось кнопка назал сверху экрана.
+        //So that when changing fragments, there was a back button.
         setupActionBarWithNavController(navController)
     }
 
-    //Чтобы при нажатий кнопки назад сверху, не выходило из activity, а передвигалось по фрагментам.
+    //So that when you press back, you didn't leave the activity,
+    // but moved back in the fragment backstack.
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
